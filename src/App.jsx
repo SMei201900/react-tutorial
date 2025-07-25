@@ -34,6 +34,8 @@ function App() {
 
 export default App
 
+/*export default is you putting ONE main tool into a tool box with NO special labeling.
+  When someone asks for "the tool," you know its just that one thing inside the box. */
 
 /*useState is a function provided by react, we are calling it.
   It is used to keep track and manage functional components. 
