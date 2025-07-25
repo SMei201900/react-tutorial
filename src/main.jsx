@@ -20,5 +20,5 @@ createRoot(document.getElementById('root')).render(
 */
 
 /*
-  index.css is NOT called in index.html but here aka we did not use the link rel that we typically do
+  index.css is NOT called in index.html but here meaning we did not use LINK REL in HTML file 
 */

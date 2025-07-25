@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'react' 
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -33,3 +33,9 @@ function App() {
 }
 
 export default App
+
+
+/*useState is a function provided by react, we are calling it.
+  It is used to keep track and manage functional components. 
+  Here it is used to change the counter when I click the button. 
+*/
