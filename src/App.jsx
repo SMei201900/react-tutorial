@@ -1,31 +1,36 @@
-import {useState, useEffect} from "react";
+import { useState } from "react";
 import Footer from "./components/Footer";
 import BookList from "./components/BookList";
 
 const list = [
   {
-    id: 1,
-    title: 'hi',
-    author: 'bye'
+	id: 1,
+	title: 'hi',
+	author: 'bye'
   },
   {
-    id: 2,
-    title: 'joe',
-    author: 'mama'
+	id: 2,
+	title: 'joe',
+	author: 'mama'
   },
-    {
-    id: 3,
-    title: 'autobiography of eugene krabs',
-    author: 'mr.krabs'
+	{
+	id: 3,
+	title: 'autobiography of eugene krabs',
+	author: 'mr.krabs'
   },
 ]
 
 function App() {
+  const [bookList, setBookList] = useState([...list]);
+  const [searchTitle, setSearchTitle] = useState("hi");
+  const filteredBooks = bookList.filter((book) => book.title.toLowerCase().includes(searchTitle.toLowerCase()));
+  
   return (
-    <section>
-      <BookList list={list} />
-      <Footer />
-    </section>
+	<section>
+  	<BookList list={filteredBooks} />
+  	<Footer />
+	</section>
+  
   )
 }
 
