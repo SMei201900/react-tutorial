@@ -16,3 +16,4 @@ const BookList = ({list=[]}) => {
     )
 }
 
+export default BookList
