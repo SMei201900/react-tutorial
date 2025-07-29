@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Footer from "./components/Footer";
 import BookList from "./components/BookList";
 
 const list = [
@@ -30,7 +29,7 @@ function App() {
   	<BookList list={filteredBooks} />
   	<Footer />
 	</section>
-  
+
   )
 }
 

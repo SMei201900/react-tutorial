@@ -6,8 +6,6 @@ const Footer = () => {
   )
 }
 
-export default Footer
-
 
 /* //learning props 
 function hello ({name}) {
