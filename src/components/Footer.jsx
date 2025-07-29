@@ -1,11 +1,5 @@
 import React from 'react'
 
-//learning props 
-function hello ({name}) {
-  return name; 
-}
-hello({name: "John"});  
-
 
 const Footer = () => {
   return (
@@ -16,3 +10,8 @@ const Footer = () => {
 export default Footer
 
 
+/* //learning props 
+function hello ({name}) {
+  return name; 
+}
+hello({name: "John"});  */
