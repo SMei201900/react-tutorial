@@ -1,3 +1,30 @@
+import Footer from "./components/Footer";
+
+const numbers =[1,2,3,4,5]
+const totalSum = numbers.reduce((accumulatedSum, currentNumber) => accumulatedSum + currentNumber, 0); 
+
+function App() {
+  const sum = 2 + 2;
+  return (
+	<section>
+  	<h1>Here is the sum: {sum}</h1>
+  	<p className="cool">Hello there</p>
+    //
+  	{numbers.map((number) => {
+    	return (
+      	<p>{number}</p>
+    	)
+  	} ) }
+  	<p> Total sum: {totalSum}</p>
+	</section>
+  )
+}
+
+export default App
+
+
+
+/*
 import { useState } from 'react' 
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
@@ -33,6 +60,7 @@ function App() {
 }
 
 export default App
+*/
 
 /*export default is you putting ONE main tool into a tool box with NO special labeling.
   When someone asks for "the tool," you know its just that one thing inside the box.*/
