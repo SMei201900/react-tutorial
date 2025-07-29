@@ -1,26 +1,32 @@
 import Footer from "./components/Footer";
+import BookList from "./components/BookList";
 
-const numbers =[1,2,3,4,5]
-const totalSum = numbers.reduce((accumulatedSum, currentNumber) => accumulatedSum + currentNumber, 0); 
+const list = [
+  {
+    id: 1,
+    title: 'hi',
+    author: 'bye'
+  },
+  {
+    id: 2,
+    title: 'joe',
+    author: 'mama'
+  },
+    {
+    id: 3,
+    title: 'autobiography of eugene krabs',
+    author: 'mr.krabs'
+  },
+]
 
 function App() {
-  const sum = 2 + 2;
   return (
-	<section>
-  	<h1>Here is the sum: {sum}</h1>
-  	<p className="cool">Hello there</p>
-    //
-  	{numbers.map((number) => {
-    	return (
-      	<p>{number}</p>
-    	)
-  	} ) }
-  	<p> Total sum: {totalSum}</p>
-    <Footer />
-	</section>
+    <section>
+      <BookList list={list} />
+      <Footer />
+    </section>
   )
 }
-
 export default App
 
 
