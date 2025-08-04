@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Footer from "./components/Footer";
 import BookList from "./components/BookList";
 import SearchBar from "./components/SearchBar";
+import axios from "axios"
+import { ToastContainer } from "react-toastify";
 
 const list = [
   {
@@ -23,10 +25,20 @@ const list = [
 
 function App() {
   const [bookList, setBookList] = useState([...list]); 
-  const [searchTitle, setSearchTitle] = useState("hi");
-  const filteredBooks = bookList.filter((book) => book.title.toLowerCase().includes(searchTitle.toLowerCase()));
+  //setting searchtitle to item of searchTitle from localStorage if it exists. If not we have a fallback value of "hi"
+  const [searchTitle, setSearchTitle] = useState(localStorage.getItem("searchItem") || "hi");
+  const filteredBooks = bookList.filter((book) => book.title.toLowerCase().includes(searchTitle.toLowerCase())
+    || book.author.toLowerCase().includes(searchTitle.toLowerCase()));
+  
+    useEffect(() => {
+      //this function updates the searchTitle value in localStorage everytime the searchTitle variable is updated in the application
+      localStorage.setItem("searchTitle", searchTitle); 
+    }, {searchTitle}); 
+    //by adding searchTitle in the dependency array everytime the seachTitle variable gets changed, we call the useEffect function 
+
   return (
     <section>
+      <ToastContainer />
       <SearchBar searchTitle={searchTitle} setSearchTitle={setSearchTitle} />
       <BookList list={filteredBooks} />
       <Footer />
