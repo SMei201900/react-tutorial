@@ -40,9 +40,7 @@ function App() {
         setIsLoading(error.message); //if an error occurs then set isError to the error.msg 
         toast.error("Error fetching books"); 
         //using toast.error to let the UI know if the request was a failure 
-      } finally {
-        setIsLoading(false); //works also
-      }
+      } 
     }
     getBooks(); //we need to call getBooks() after we have defined it in our function 
   }, [] );  
