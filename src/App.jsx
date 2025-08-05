@@ -39,7 +39,6 @@ function App() {
     getBooks(); //we need to call getBooks() after we have defined it in our function 
   }, [] );  
 
-
   return (
     <section>
       <ToastContainer />
