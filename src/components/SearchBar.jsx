@@ -20,4 +20,3 @@ const SearchBar = ({ searchTitle, setSearchTitle }) => {
 
 export default SearchBar
 
-// {/*this is how you comment inside JS*/} 
