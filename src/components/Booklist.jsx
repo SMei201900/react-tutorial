@@ -3,9 +3,9 @@ import React from 'react'
 const BookList = ({ list = [] }) => {
   return (
     <div>
-        {list.map((item) => {
+        {list.map((item, index) => {
             return (
-                <section key={item.id}>
+                <section className={`book ${index % 2 === 0 ? 'primary' : 'secondary'}`}>
                     <p>{item.title}</p>
                     <p>{item.author}</p>
                 </section>
