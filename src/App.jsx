@@ -8,6 +8,9 @@ import { ToastContainer, toast } from "react-toastify";
 function App() {
   const [bookList, setBookList] = useState([]); 
   //setting searchtitle to item of searchTitle from localStorage if it exists. If not we have a fallback value of "hi"
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState("");
+  // isLoading and isError should go under bookList state
   const [searchTitle, setSearchTitle] = useState(localStorage.getItem("searchItem") || "hi");
   const filteredBooks = bookList.filter(
     (book) => book.title.toLowerCase().includes(searchTitle.toLowerCase())
@@ -22,16 +25,19 @@ function App() {
   useEffect(() => {
     async function getBooks() { //async function to get books from bookstore API 
       try { 
+        setIsLoading(true);
+        //put this at the beginning of function to track the isLoading state through the function 
         const response = await axios.get("https://bookstore-api-six.vercel.app/api/books")
-        /*instead of fetch and json.response, we can do this*/
         /*using axios to send HTTP GET request to the endppoint and storing it in a variable called "response"*/
         setBookList(response.data); 
-        /*using setBookList function to update bookList to response.data from API*/
+        //using setBookList function to update bookList to response.data from API
         toast.success("Success fetching books");
         //using toast.success to let the UI know this request was successful 
+        setIsLoading(false);
+        //if this block of code was successful, we MUST set isLoading to "false" for the UI to know the data is loaded 
       } catch (error) {
-        console.log(error.message);
-        //using console.log to console error message if it occurs 
+        setIsLoading(false);
+        setIsLoading(error.message); //if an error occurs then set isError to the error.msg 
         toast.error("Error fetching books"); 
         //using toast.error to let the UI know if the request was a failure 
       }
