@@ -2,37 +2,39 @@ import { useState, useEffect } from "react";
 import Footer from "./components/Footer";
 import BookList from "./components/BookList";
 import SearchBar from "./components/SearchBar";
-import axios from "axios"
+import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import BookForm from "./components/BookForm";
 
 function App() {
   const [bookList, setBookList] = useState([]); 
-  //setting searchtitle to item of searchTitle from localStorage if it exists. If not we have a fallback value of "hi"
   const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState("");
   // isLoading and isError should go under bookList state
-  const [searchTitle, setSearchTitle] = useState(localStorage.getItem("searchItem") || "hi");
-  const filteredBooks = bookList.filter(
-    (book) => book.title.toLowerCase().includes(searchTitle.toLowerCase())
-    || book.author.toLowerCase().includes(searchTitle.toLowerCase()));
+  const [isError, setIsError] = useState("");
+  const [searchTitle, setSearchTitle] = useState(localStorage.getItem("searchTitle") || "hi");
+  // setting searchtitle to item of searchTitle from localStorage if it exists, if not we have a fallback value of hi
+  const filteredBooks = bookList.filter((book) => book.title.toLowerCase().includes(searchTitle.toLowerCase()) || book.author.toLowerCase().includes(searchTitle.toLowerCase()));
   
+  const addBookToList = (book) => {
+    setBookList([...bookList, book]); // same thing as using .push to append to end of array
+  }
+
   useEffect(() => {
-    //this function updates the searchTitle value in localStorage everytime the searchTitle variable is updated in the application
-    localStorage.setItem("searchTitle", searchTitle); 
-    }, {searchTitle}); 
-    //by adding searchTitle in the dependency array everytime the seachTitle variable gets changed, we call the useEffect function 
-  
+    // this function updates the searchTitle value in local storage everytime the searchTitle variable is updated in the application
+    localStorage.setItem("searchTitle", searchTitle);
+  }, [searchTitle]); // by adding searchTitle in the dependency array everytime the searchTitle variable gets changed we call the useEffect function
+
   useEffect(() => {
     async function getBooks() { //async function to get books from bookstore API 
       try { 
         setIsLoading(true);
-        //put this at the beginning of function to track the isLoading state through the function 
-        const response = await axios.get("https://bookstore-api-six.vercel.app/api/books")
-        /*using axios to send HTTP GET request to the endppoint and storing it in a variable called "response"*/
-        setBookList(response.data); 
+        // put this at the beginning of function to track the isLoading state throughout the function
+        const response = await axios.get("https://bookstore-api-six.vercel.app/api/books");
+        // using axios to send HTTP GET request to the endpoint and storing it in response variable
+        setBookList(response.data);
         //using setBookList function to update bookList to response.data from API
         toast.success("Success fetching books");
-        //using toast.success to let the UI know this request was successful 
+        // using toast.success to let the UI know this request was successful
         setIsLoading(false);
         //if this block of code was successful, we MUST set isLoading to "false" for the UI to know the data is loaded 
       } catch (error) {
@@ -48,15 +50,23 @@ function App() {
   return (
     <section>
       <ToastContainer />
+      {isError && <p>{isError}</p>}
       <SearchBar searchTitle={searchTitle} setSearchTitle={setSearchTitle} />
-      <BookList list={filteredBooks} />
+      {/* Place under SearchBar */}
+      <BookForm addBookToList={addBookToList} />
+      {/* Place Above isLoading logic */}
+      {isLoading ? (
+        <p>Loading Spinner....</p>
+      ): (
+        <BookList list={filteredBooks} />
+      )}
+      
       <Footer />
     </section>
   )
 }
 
 export default App
-
 
 
 /*export default App
